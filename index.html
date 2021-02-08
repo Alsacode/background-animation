@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background-Animation</title>
+    <style>
+      *{
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box; 
+      }
+      body{
+          background-color: #9fe4b4;
+      }
+      section{
+          position: relative;
+          width: 100%;
+          height: 100vh;
+          transform-style: preserve-3d;
+          perspective: 500px;
+      }
+      section h3 {
+          position: relative;
+          width: 100%;
+          height: 100vh;
+          text-align: center;
+          line-height: 100vh;
+          font-size: 6vw;
+          color: #fff;
+          font-weight: 700;
+      }
+      .outer-box {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          display: flex;
+          flex-wrap: wrap;
+      }
+      .outer-box .inner-box {
+          position: relative;
+          display: block;
+          width: 2vw;
+          height: 5vw;
+         
+          animation: animate 2s ease-out forwards;
+          animation-delay: 1s;
+      }
+      @keyframes animate{
+        0%{
+            transform: translateZ(2000px);
+            background: url(birds-background.jpg);
+            background-position: center;
+            background-attachment:  fixed;
+            background-size: cover;
+            box-shadow: 0 5px 15px  rgba(0, 0, 0, 0.5);
+        }  
+        100%{
+            transform: translateZ(0px);
+            background: url(birds-background.jpg);
+            background-position: center;
+            background-attachment:  fixed;
+            background-size: cover;
+            box-shadow: 0 5px 15px  rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 0, 0, 1);
+        }
+      }
+      section.active .outer-box .inner-box {
+          animation: animat2 2s ease-in-out forwards;
+          background: url(birds-background.jpg);
+            background-position: center;
+            background-attachment:  fixed;
+            background-size: cover;
+            box-shadow: 0 5px 15px  rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 0, 0, 1);
+      }
+
+      @keyframes animat2{
+        0%{
+            transform: translateZ(0px);
+            background: url(birds-background.jpg);
+            background-position: center;
+            background-attachment:  fixed;
+            background-size: cover;
+            box-shadow: 0 5px 15px  rgba(0, 0, 0, 0.5);
+        }  
+        100%{
+            transform: translateZ(2000px);
+            background: url(birds-background.jpg);
+            background-position: center;
+            background-attachment:  fixed;
+            background-size: cover;
+            box-shadow: 0 5px 15px  rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(0, 0, 0, 1);
+        }
+      }
+
+    </style>
+
+</head>
+<body>
+
+    <section>
+        
+          <div class="outer-box">
+              <div class="inner-box"></div>
+          </div>
+
+    </section>
+    
+</body>
+
+<script>
+    const outer = document.getElementsByClassName("outer-box")[0];
+    const inner = document.getElementsByClassName("inner-box");
+    for (var x = 1; x < 400; x++) {
+      outer.innerHTML += "<div class='inner-box'></div>"; 
+      const duration = Math.random() * 4;
+      inner[x].style.animationDuration = 2+duration+'s';
+      inner[x].style.animationDelay = duration+'s';
+
+    }
+
+    const section = document.querySelector('section');
+    setTimeout(function(){
+        section.classList.add('active')
+    }, 14000)
+</script>
+</html>
